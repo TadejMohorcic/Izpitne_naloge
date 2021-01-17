@@ -9,23 +9,16 @@ def pozresni_lisjak(matrix, n):
     @lru_cache(maxsize=None)
     def lisjak_pomozna(i, j, n):
         val = matrix[i][j]
-        #zmanjka korakov
         if n == 0:
             return 0
-        #ne moremo desno
         elif j == (st_stolpcev - 1):
-            #tudi ne moremo dol
             if i == (st_vrstic - 1):
                 return val
-            #nas vrze dol neprostovoljno
             else:
-                return val + lisjak_pomozna(i + 1, 0, n -1) 
-        #lahko gremo desno    
+                return val + lisjak_pomozna(i + 1, 0, n -1)    
         else:
-            #vrze me desno proti moji volji
             if i == (st_vrstic - 1):
                 return val + lisjak_pomozna(i, j + 1, n - 1)
-            #normalen lisjak ki ne leti po polju
             else:
                 return val + max(lisjak_pomozna(i, j + 1, n - 1), lisjak_pomozna(i + 1, 0, n - 1))
 
@@ -58,7 +51,6 @@ def mama_franca(dolzina, stevilo, sirina):
     @lru_cache
     def slepa_mama(n, m, l):
         stevilo_dobrih_postavitev = 0
-        #narobe je ce velja naslednje
         if n == l and m == 1:
             return 1
         elif m == 1 and n > l:
